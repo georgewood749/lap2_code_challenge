@@ -12,3 +12,14 @@ const postEntry = async (title, pseudonym, bodyText, timestamp) => {
         })
     })
 }
+
+
+// function textCounter(postBox, counter, charLimit) {
+//     var charCount = document.getElementById(counter);
+//     if (postBox.value.length > charLimit) {
+//         postBox.value = postBox.value.substring(0, charLimit);
+//         return false;
+//     } else {
+//         charCount.value = charLimit - postBox.value.length;
+//     }
+// }
