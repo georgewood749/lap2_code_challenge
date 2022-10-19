@@ -33,29 +33,19 @@ class Post {
         });
     }
 
-    // static findByOwner(id) {
-    //     return new Promise(async (resolve, reject) => {
-    //         try {
-    //             let postsData = await db.query(`SELECT * FROM posts WHERE ownerId = $1;`, [id]);
-    //             const posts = postsData.rows.map(d => new Post(d))
-    //             resolve(posts);
-    //         } catch (err) {
-    //             reject('Error retrieving owner\'s posts');
-    //         }
-    //     });
-    // }
-
-    // static create(name, age) {
-    //     return new Promise(async (resolve, reject) => {
-    //         try {
-    //             let postData = await db.query(`INSERT INTO posts (name, age) VALUES ($1, $2) RETURNING *;`, [name, age]);
-    //             let newPost = new Post(postData.rows[0]);
-    //             resolve(newPost);
-    //         } catch (err) {
-    //             reject('Error creating post');
-    //         }
-    //     });
-    // }
+    static create(postData) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const { author, datetime, title, content } = postData;
+                let result = await db.query(`INSERT INTO posts (author, datetime, title, content) 
+                                                VALUES ($1, $2, $3, $4) RETURNING *;`, [author, datetime, title, content]);
+                let newPost = new Post(result.rows[0]);
+                resolve(newPost);
+            } catch (err) {
+                reject('Error creating post');
+            }
+        });
+    }
 
     // destroy() {
     //     return new Promise(async (resolve, reject) => {
