@@ -1,32 +1,50 @@
 version: '3'
 services:
-  server:
+  client:
+    container_name: theWoo_dev_client
+    build: ./client
+    image: debug_client
+    ports: 
+      - 8080:8080
+    working_dir: /code
+    volumes:
+      - type: bind
+        source: ./client
+        target: /code
+    command: [ "http-server" ]
+
+  api:
+    container_name: theWoo_dev_api
     image: node:12.18.4
-    working_dir: /server
+    working_dir: /code
     ports: 
       - 3000:3000
     environment: 
-      - PGUSER=futureproof
+      - PGUSER=theWooGs
       - PGHOST=db
-      - PGPASSWORD=doggospass
-      - PGDATABASE=doggos
+      - PGPASSWORD=theWoopass
+      - PGDATABASE=theWoo
       - PGPORT=5432
     depends_on:
       - db
     volumes:
       - type: bind
         source: ./api
-        target: /server
+        target: /code
     command: bash -c "npm install && npm run seedDev && npm run dev"
 
   db:
+    container_name: theWoo_dev_db
     image: postgres:latest
     volumes:
       - "dbdata:/var/lib/postgresql/data"
-      - "./db:/docker-entrypoint-initdb.d/:ro"
+      - "./db/migrations:/docker-entrypoint-initdb.d/:ro"
     environment: 
-      - POSTGRES_DB=doggos
-      - POSTGRES_USER=futureproof
-      - POSTGRES_PASSWORD=doggospass
+      - POSTGRES_DB=theWoo
+      - POSTGRES_USER=theWooGs
+      - POSTGRES_PASSWORD=theWoopass
 volumes:
   dbdata:
+networks: 
+  default:
+    name: theWoo_api
