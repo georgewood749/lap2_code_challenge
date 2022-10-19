@@ -47,16 +47,16 @@ class Post {
         });
     }
 
-    // destroy() {
-    //     return new Promise(async (resolve, reject) => {
-    //         try {
-    //             await db.query(`DELETE FROM posts WHERE id = $1;`, [this.id]);
-    //             resolve('Post was deleted')
-    //         } catch (err) {
-    //             reject('Post could not be deleted')
-    //         }
-    //     })
-    // }
+    destroy() {
+        return new Promise(async (resolve, reject) => {
+            try {
+                await db.query(`DELETE FROM posts WHERE id = $1;`, [this.id]);
+                resolve('Post was deleted')
+            } catch (err) {
+                reject('Post could not be deleted')
+            }
+        })
+    }
 
 }
 
