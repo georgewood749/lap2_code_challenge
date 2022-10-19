@@ -21,20 +21,17 @@ class Post {
         })
     }
 
-    // static findById(id) {
-    //     return new Promise(async (resolve, reject) => {
-    //         try {
-    //             let postData = await db.query(`SELECT posts.*, owners.address as location
-    //                                                 FROM posts
-    //                                                 JOIN owners ON posts.owner_id = owners.id
-    //                                                 WHERE posts.id = $1;`, [id]);
-    //             let post = new Post(postData.rows[0]);
-    //             resolve(post);
-    //         } catch (err) {
-    //             reject('Post not found');
-    //         }
-    //     });
-    // }
+    static findById(id) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                let postData = await db.query(`SELECT * FROM posts WHERE posts.id = $1;`, [id]);
+                let post = new Post(postData.rows[0]);
+                resolve(post);
+            } catch (err) {
+                reject('Post not found');
+            }
+        });
+    }
 
     // static findByOwner(id) {
     //     return new Promise(async (resolve, reject) => {
