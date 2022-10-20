@@ -3,10 +3,10 @@ const db = require('../dbConfig/init');
 class Post {
     constructor(data) {
         this.id = data.id
+        this.author = data.author
+        this.datetime = data.datetime
         this.title = data.title
-        this.pseudonym = data.pseudonym
-        this.bodyText = data.bodyText
-        // this.timeStamp = data.timeStamp
+        this.content = data.content
     }
 
     static get all() {
@@ -24,10 +24,7 @@ class Post {
     static findById(id) {
         return new Promise(async (resolve, reject) => {
             try {
-                let postData = await db.query(`SELECT posts.*, owners.address as location
-                                                    FROM posts
-                                                    JOIN owners ON posts.owner_id = owners.id
-                                                    WHERE posts.id = $1;`, [id]);
+                let postData = await db.query(`SELECT * FROM posts WHERE posts.id = $1;`, [id]);
                 let post = new Post(postData.rows[0]);
                 resolve(post);
             } catch (err) {
@@ -36,38 +33,16 @@ class Post {
         });
     }
 
-    static findByOwner(id) {
+    static create(postData) {
         return new Promise(async (resolve, reject) => {
             try {
-                let postsData = await db.query(`SELECT * FROM posts WHERE ownerId = $1;`, [id]);
-                const posts = postsData.rows.map(d => new Post(d))
-                resolve(posts);
-            } catch (err) {
-                reject('Error retrieving owner\'s posts');
-            }
-        });
-    }
-
-    static create(name, age) {
-        return new Promise(async (resolve, reject) => {
-            try {
-                let postData = await db.query(`INSERT INTO posts (name, age) VALUES ($1, $2) RETURNING *;`, [name, age]);
-                let newPost = new Post(postData.rows[0]);
+                const { author, datetime, title, content } = postData;
+                let result = await db.query(`INSERT INTO posts (author, datetime, title, content) 
+                                                VALUES ($1, $2, $3, $4) RETURNING *;`, [author, datetime, title, content]);
+                let newPost = new Post(result.rows[0]);
                 resolve(newPost);
             } catch (err) {
                 reject('Error creating post');
-            }
-        });
-    }
-
-    update() {
-        return new Promise(async (resolve, reject) => {
-            try {
-                let updatedPostData = await db.query(`UPDATE posts SET age = age + 1 WHERE id = $1 RETURNING *;`, [this.id]);
-                let updatedPost = new Post(updatedPostData.rows[0]);
-                resolve(updatedPost);
-            } catch (err) {
-                reject('Error updating post');
             }
         });
     }
