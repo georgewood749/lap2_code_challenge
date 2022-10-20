@@ -113,13 +113,14 @@ async function getEntry(id) {
 async function postEntry(e) {
     e.preventDefault();
     try {
+        const formData = Object.fromEntries(new FormData(e.target));
+        formData.datetime = new Date().toJSON();
+
         const options = {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+            body: JSON.stringify(formData)
         }
-        
-        console.log(new FormData(e.target));
 
         const response = await fetch('http://localhost:3000/posts', options);
         const { id, err } = await response.json();
