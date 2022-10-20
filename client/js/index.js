@@ -45,7 +45,6 @@ function defaultPage() {
         form.appendChild(document.createElement('br'));
     })
 
-    // form.onsubmit = postEntry;
     form.onsubmit = postEntry;
 
     main.appendChild(form);
@@ -88,6 +87,8 @@ async function postEntry(e) {
             body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
         }
         
+        console.log(new FormData(e.target));
+
         const response = await fetch('http://localhost:3000/posts', options);
         const { id, err } = await response.json();
         if(err) { 

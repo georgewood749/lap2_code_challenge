@@ -8,3 +8,4 @@ CREATE TABLE posts (
     title varchar(255) NOT NULL,
     content text NOT NULL
 );
+
