@@ -31,10 +31,6 @@ function updateContent() {
 function defaultPage() {
     main.innerHTML = '';
 
-    const header = document.createElement('h1');
-    header.innerText = 'Write down your thoughts.\nKeep them away from others.';
-    main.appendChild(header)
-
     const form = document.createElement('form');
 
     formElements.forEach(t => {
