@@ -1,5 +1,5 @@
-# Gustafgraph
-
+# The Woo - Telegra.ph varient
+![result.png](./results_for_readme.png)
 ## Project description
 This project requires us to create an online journalling website, similar to 'telegra.ph', where users can create private journal entries.
 

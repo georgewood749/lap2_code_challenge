@@ -9,6 +9,6 @@ const postsRoutes = require('./routes/posts')
 server.use('/posts', postsRoutes)
 
 
-server.get('/', (req, res) => res.send('Welcome to the Gustafgraph'))
+server.get('/', (req, res) => res.send('Welcome to the Woo API'))
 
 module.exports = server
