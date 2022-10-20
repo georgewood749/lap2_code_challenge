@@ -2,15 +2,14 @@
 const main = document.querySelector('main');
 
 const formElements = [
-    {tag: 'input', id: 'title', attributes: { type: 'text', name: 'title', placeholder: 'Title', required: '' } },
-    {tag: 'input', id: 'author', attributes: { type: 'text', name: 'author', placeholder: 'Author' } },
-    {tag: 'textarea', id: 'content', attributes: { name: 'content', placeholder: 'What\'s on your mind?', rows: '20', cols: '100', required: '' } },
-    {tag: 'input', id: 'submit', attributes: { type: 'submit', value: 'PUBLISH' } }
+    { tag: 'input', id: 'title', attributes: { type: 'text', name: 'title', placeholder: 'Title', required: '' } },
+    { tag: 'input', id: 'author', attributes: { type: 'text', name: 'author', placeholder: 'Author' } },
+    { tag: 'textarea', id: 'content', attributes: { name: 'content', placeholder: 'What\'s on your mind?', rows: '20', cols: '100', required: '' } },
+    { tag: 'input', id: 'submit', attributes: { type: 'submit', value: 'PUBLISH' } }
 ]
 
 //* Feed through
 defaultPage();
-
 
 
 //* hashchange handeling
@@ -45,19 +44,25 @@ function defaultPage() {
 
     main.appendChild(form);
 
+
+
 }
 
 async function loadEntry(id) {
     main.innerHTML = '';
     
     const data = await getEntry(id);
-    main.textContent = `${data.id} - ${data.title} - ${data.author} - ${data.content}`
+    main.textContent = `${data.id} - ${data.title} - ${data.author} - 
+    ${new Date(data.datetime).toLocaleDateString('en-GB', {month: 'long', day: 'numeric',  year: 'numeric'})} - 
+    ${data.content}`
 
 }
 
 
 
 //* Random name generator
+
+
 
 //* Time and date
 
@@ -77,13 +82,14 @@ async function getEntry(id) {
 async function postEntry(e) {
     e.preventDefault();
     try {
+        const formData = Object.fromEntries(new FormData(e.target));
+        formData.datetime = new Date().toJSON();
+
         const options = {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(Object.fromEntries(new FormData(e.target)))
+            body: JSON.stringify(formData)
         }
-        
-        console.log(new FormData(e.target));
 
         const response = await fetch('http://localhost:3000/posts', options);
         const { id, err } = await response.json();
