@@ -61,13 +61,17 @@ async function loadEntry(id) {
     const author = document.createElement('p')
     author.id = "author"
 
+    const date = new Date(data.datetime).toLocaleDateString('en-GB', {month: 'long', day: 'numeric',  year: 'numeric'})
+
     // * Author field is auto-populated with 'anonymous' if user does not enter a name. 
     const authorText = data.author
     if (authorText) {
-        author.textContent = authorText
+        author.textContent = `${authorText} • ${date}`
     } else {
-        author.textContent = `anonymous`
+        author.textContent = `anonymous • ${date}`
     }
+
+    
 
     // const datetime = data.datetime
     // content.id = "author"
