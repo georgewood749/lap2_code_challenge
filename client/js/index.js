@@ -5,7 +5,7 @@ const formElements = [
     {tag: 'input', id: 'title', attributes: { type: 'text', name: 'title', placeholder: 'Title', required: '' } },
     {tag: 'input', id: 'author', attributes: { type: 'text', name: 'author', placeholder: 'Author' } },
     {tag: 'textarea', id: 'content', attributes: { name: 'content', placeholder: 'What\'s on your mind?', rows: '20', cols: '100', required: '' } },
-    {tag: 'input', id: 'submit', attributes: { type: 'submit', value: 'Post!' } }
+    {tag: 'input', id: 'submit', attributes: { type: 'submit', value: 'PUBLISH' } }
 ]
 
 //* Feed through
