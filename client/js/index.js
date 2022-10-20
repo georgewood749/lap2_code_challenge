@@ -4,7 +4,7 @@ const main = document.querySelector('main');
 const formElements = [
     {tag: 'input', id: 'title', attributes: { type: 'text', name: 'title', placeholder: 'Title', required: '' } },
     {tag: 'input', id: 'author', attributes: { type: 'text', name: 'author', placeholder: 'Author' } },
-    {tag: 'textarea', id: 'content', attributes: { name: 'content', placeholder: 'What\'s on your mind?', rows: '20', cols: '100', required: '' } },
+    {tag: 'textarea', id: 'content', attributes: { name: 'content', placeholder: 'What\'s on your mind?', rows: '10', cols: '100', required: '' } },
     {tag: 'input', id: 'submit', attributes: { type: 'submit', value: 'PUBLISH' } }
 ]
 
@@ -51,7 +51,43 @@ async function loadEntry(id) {
     main.innerHTML = '';
     
     const data = await getEntry(id);
-    main.textContent = `${data.id} - ${data.title} - ${data.author} - ${data.content}`
+
+    // const postId = document.createElement('p')
+    // postId.id = "content"
+
+    const title = document.createElement('p')
+    title.id = "title"
+
+    const author = document.createElement('p')
+    author.id = "author"
+
+    // * Author field is auto-populated with 'anonymous' if user does not enter a name. 
+    const authorText = data.author
+    if (authorText) {
+        author.textContent = authorText
+    } else {
+        author.textContent = `anonymous`
+    }
+
+    // const datetime = data.datetime
+    // content.id = "author"
+
+    const datetime = document.createElement('p')
+    datetime.id = "author"
+
+    const content = document.createElement('p')
+    content.id = "content"
+
+    title.textContent = data.title
+    content.textContent = data.content
+    // datetime.textContent = data.datetime
+
+    main.appendChild(title)
+    main.appendChild(author)
+    main.appendChild(content)
+    // main.appendChild(postId)
+    
+    // main.textContent = `${data.id} - ${data.title} - ${data.author} - ${data.content}`
 
 }
 

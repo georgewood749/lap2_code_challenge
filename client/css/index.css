@@ -1,26 +1,39 @@
 #title {
     font-size: 50px;
-    font-weight: bolder;
+    font-weight: bold;
+    font-family: 'Helvetica', Arial, Lucida Grande, sans-serif;
+    margin-bottom: 2px;
+    width: 100%;
+    /* word-break: break-all; */
+    /* word-wrap: break-word; */
+    /* overflow-wrap: break-word; */
 }
 
 #author {
     font-size: 30px;
+    font-family: 'Helvetica', Arial, Lucida Grande, sans-serif;
+    font-weight: normal;
+    font-style: italic;
 }
 
 #content {
     font-size: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    white-space: pre-wrap;
 }
 
 #title,
 #author,
 #content {
     border: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 #title::placeholder,
 #author::placeholder,
 #content::placeholder {
-    color: rgb(91, 91, 91);
+    color: rgb(120, 120, 120);
 }
 
 #title::placeholder {
@@ -31,7 +44,7 @@
 #title:hover::placeholder,
 #author:hover::placeholder,
 #content:hover::placeholder {
-    color: rgb(181, 181, 181);
+    color: rgb(180, 180, 180);
 
 }
 
@@ -80,8 +93,4 @@ textarea {
 
 body {
     margin-left: 5%;
-}
-
-h1 {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
