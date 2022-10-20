@@ -1,12 +1,66 @@
 //* SETUP
 const main = document.querySelector('main');
 
+//* Random name generator
+const randomNouns = [
+    "girlfriend",
+    "disk",
+    "administration",
+    "engine",
+    "independence",
+    "department",
+    "meal",
+    "person",
+    "ambition",
+    "personality",
+    "opinion",
+    "magazine",
+    "emotion",
+    "analyst",
+    "orange",
+    "depression",
+    "selection",
+    "psychology",
+    "platform",
+    "departure"
+];
+const randomAdjs = [
+    "Happy",
+    "Stinky",
+    "Obscene",
+    "Particular",
+    "Existential",
+    "Irritating",
+    "Defiant",
+    "Devilish",
+    "Uninterested",
+    "Squalid",
+    "Psychedelic",
+    "Rhetorical",
+    "Ethereal",
+    "Ostentatious",
+    "Nutritious",
+    "Surreptitious",
+    "Lamentable",
+    "Peaceful",
+    "Grotesque",
+    "Tangy"
+];
+function ranName(){
+    return `${randomAdjs[Math.floor(Math.random()*randomAdjs.length)]} ${randomNouns[Math.floor(Math.random()*randomNouns.length)]}`
+}
+
+
 const formElements = [
     {tag: 'input', id: 'title', attributes: { type: 'text', name: 'title', placeholder: 'Title', required: '' } },
-    {tag: 'input', id: 'author', attributes: { type: 'text', name: 'author', placeholder: 'Author' } },
+    {tag: 'input', id: 'author', attributes: { type: 'text', name: 'author', placeholder: 'Author'} },
     {tag: 'textarea', id: 'content', attributes: { name: 'content', placeholder: 'What\'s on your mind?', rows: '10', cols: '100', required: '' } },
     {tag: 'input', id: 'submit', attributes: { type: 'submit', value: 'PUBLISH' } }
-]
+];
+
+
+
+
 
 //* Feed through
 defaultPage();
@@ -65,11 +119,7 @@ async function loadEntry(id) {
 
     // * Author field is auto-populated with 'anonymous' if user does not enter a name. 
     const authorText = data.author
-    if (authorText) {
-        author.textContent = `${authorText} • ${date}`
-    } else {
-        author.textContent = `anonymous • ${date}`
-    }
+    author.textContent = `${authorText||ranName()} • ${date}`
 
     
 
@@ -96,10 +146,6 @@ async function loadEntry(id) {
 }
 
 
-
-//* Random name generator
-
-//* Time and date
 
 
 
