@@ -1,6 +1,13 @@
 //* SETUP
 const main = document.querySelector('main');
 
+const formElements = [
+    {tag: 'input', id: 'title', attributes: { type: 'text', name: 'title', placeholder: 'Title', required: '' } },
+    {tag: 'input', id: 'author', attributes: { type: 'text', name: 'author', placeholder: 'Author'} },
+    {tag: 'textarea', id: 'content', attributes: { name: 'content', placeholder: 'What\'s on your mind?', rows: '10', cols: '100', required: '' } },
+    {tag: 'input', id: 'submit', attributes: { type: 'submit', value: 'PUBLISH' } }
+];
+
 //* Random name generator
 const randomNouns = [
     "girlfriend",
@@ -50,21 +57,8 @@ function ranName(){
     return `${randomAdjs[Math.floor(Math.random()*randomAdjs.length)]} ${randomNouns[Math.floor(Math.random()*randomNouns.length)]}`
 }
 
-
-const formElements = [
-    {tag: 'input', id: 'title', attributes: { type: 'text', name: 'title', placeholder: 'Title', required: '' } },
-    {tag: 'input', id: 'author', attributes: { type: 'text', name: 'author', placeholder: 'Author'} },
-    {tag: 'textarea', id: 'content', attributes: { name: 'content', placeholder: 'What\'s on your mind?', rows: '10', cols: '100', required: '' } },
-    {tag: 'input', id: 'submit', attributes: { type: 'submit', value: 'PUBLISH' } }
-];
-
-
-
-
-
 //* Feed through
 defaultPage();
-
 
 
 //* hashchange handeling
@@ -72,12 +66,7 @@ window.addEventListener('hashchange', updateContent);
 
 function updateContent() {
     let hash = window.location.hash.substring(1);
-    if (hash) {
-        loadEntry(hash);
-    } else {
-        defaultPage();
-    }
-
+    hash? loadEntry(hash) : defaultPage();
 }
 
 //* Elements rendering
