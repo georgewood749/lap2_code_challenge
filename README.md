@@ -35,23 +35,15 @@ The user will only be able to access their past entries by entering their post I
 - Created functions to fetch posts and display them onscreen
 - Adjusted styling
 
-
-### Changelog
-
-## Screenshots/Images
-
 ## Wins & Challenges
 ### Wins
 - Posting and fetching from database works as intended
 - New post automatically displayed when 'publish' is pressed.
+- Date posts to user entry 
 
 ### Challenges
 - Setting up database and docker
-
-
-## Code snippets
-
-## Bugs
+- Hash path changes
 
 ## Future features
 - User profiles (login feature)
