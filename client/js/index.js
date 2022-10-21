@@ -106,9 +106,6 @@ async function loadEntry(id) {
     
     const data = await getEntry(id);
 
-    // const postId = document.createElement('p')
-    // postId.id = "content"
-
     const title = document.createElement('p')
     title.id = "title"
 
@@ -117,14 +114,8 @@ async function loadEntry(id) {
 
     const date = new Date(data.datetime).toLocaleDateString('en-GB', {month: 'long', day: 'numeric',  year: 'numeric'})
 
-    // * Author field is auto-populated with 'anonymous' if user does not enter a name. 
     const authorText = data.author
     author.textContent = `${authorText||ranName()} • ${date}`
-
-    
-
-    // const datetime = data.datetime
-    // content.id = "author"
 
     const datetime = document.createElement('p')
     datetime.id = "author"
@@ -134,14 +125,10 @@ async function loadEntry(id) {
 
     title.textContent = data.title
     content.textContent = data.content
-    // datetime.textContent = data.datetime
 
     main.appendChild(title)
     main.appendChild(author)
     main.appendChild(content)
-    // main.appendChild(postId)
-    
-    // main.textContent = `${data.id} - ${data.title} - ${data.author} - ${data.content}`
 
 }
 
